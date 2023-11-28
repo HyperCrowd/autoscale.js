@@ -199,7 +199,7 @@ function scale (element, useReference = false, scaleFactorOverride = false) {
 
 			if (children.length === 0) {
 				// No children exists, this is just a text leaf, so scale only the text
-				result = scaleText(element, 1, element, element.offsetWidth)
+				result = scaleFullWidthText(element, 1, element, element.offsetWidth)
 			} else {
 				// Scale the children
 				children.forEach(child => {
