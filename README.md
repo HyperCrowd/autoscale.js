@@ -2,7 +2,7 @@
 
 CSS scaling is a mess.  This script gives you the ability to add an`autoscale` attribute to an HTML tag to drive automatic scaling of HTML components.
 
-Here's example HTML of how to use it:
+Here's [an example of the autoscaling in effect](https://htmlpreview.github.io/?https://github.com/HyperCrowd/autoscale.js/blob/main/index.html) and here is the code for it:
 
 ```html
 <body>
