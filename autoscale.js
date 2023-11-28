@@ -165,7 +165,7 @@ function scale (element, useReference = false, scaleFactorOverride = false) {
 		: scaleFactorOverride
 
 	const referenceElement = useReference === false
-		? document.getElementById(element.getAttribute('autoscale')) || element.parentNode
+		? document.getElementById(element.getAttribute('scaleTo')) || element.parentNode
 		: useReference
 
 	const referenceStyles = window.getComputedStyle(referenceElement);
@@ -237,7 +237,7 @@ function resizeHandler (elements) {
  *
  */
 async function main () {
-	const autoscaleElements = document.querySelectorAll('[autoscale]');
+	const autoscaleElements = document.querySelectorAll('[scale]');
 	autoscaleElements.forEach(element => scale(element))
 }
 

@@ -89,37 +89,37 @@
 	}
 </style>
 <body>
-  <!-- The autoscale attribute should be the ID of an element to scale with -->
+  <!-- The scaleTo attribute should be the ID of an element to scale with -->
   <div id="scaleReference">
   	This div (#scaleReference) is 50% width of the body and has a p as a sibling
- 	  <pre>&lt;p autoscale="scaleReference" scale="0.25"&gt; :</pre>
+ 	  <pre>&lt;p scale="0.25" scaleTo="scaleReference"&gt; :</pre>
   </div>
-  <p autoscale="scaleReference" scale="0.25">
+  <p scale="0.25" scaleTo="scaleReference">
 	  This text width is<br />
 	  is 25% of the <br />
 		#scaleReference<br />
 		sibling's 50% width 
 	</p>
 
-  <!-- The autoscale attribute without an ID will scale to the immediate parent -->
+  <!-- The scale attribute without an scaleTo attributewill scale to the immediate parent -->
   <div id="green">
   	This div contains two span's scaled to 50% of their parent
-  	<pre>&lt;span autoscale scale="0.5"&gt; :</pre>
-    <span autoscale scale="0.5">
+  	<pre>&lt;span scale="0.5"&gt; :</pre>
+    <span scale="0.5">
     	This text width is 50%
     </span>
     <br />
-    <span autoscale scale="0.5">
+    <span scale="0.5">
     	of the green parent div
     </span>
   </div>
 
-  <!-- The autoscale attribute also scales divs -->
+  <!-- The scale attribute also scales divs -->
  	<div id="pink">
 		This div contains an autoscaling div child
-		<pre>&lt;div autoscale scale="0.25"&gt; :</pre>
+		<pre>&lt;div scale="0.25"&gt; :</pre>
 
-		<div id="gray" autoscale scale="0.25">
+		<div id="gray" scale="0.25">
 			This div is 25% of it's pink parent 
 	  </div>
   </div>
@@ -127,8 +127,8 @@
   <!-- Autoscaled divs can also have the text within them automatically scaled with "scaleContents" -->
  	<div id="pink">
 		This div contains an autoscaling div child that is childless
-		<pre>&lt;div autoscale scale="0.25" scaleContents&gt; :</pre>
-		<div id="gray" autoscale scale="0.25" scaleContents>
+		<pre>&lt;div scale="0.25" scaleContents&gt; :</pre>
+		<div id="gray" scale="0.25" scaleContents>
 			This div is 25% of it's pink parent<br />
 			as long as it has no children
 	  </div>
@@ -137,8 +137,8 @@
   <!-- Autoscaled divs can also have the text within them automatically scaled with "scaleContents" -->
  	<div id="lavender">
 		This div contains an autoscaling div child with scaling content
-		<pre>&lt;div autoscale scale="0.5" scaleContents&gt; :</pre>
-		<div id="gray" autoscale scale="0.5" scaleContents>
+		<pre>&lt;div scale="0.5" scaleContents&gt; :</pre>
+		<div id="gray" scale="0.5" scaleContents>
 			<img src="https://picsum.photos/200/300">
 			<br />
 			<span>And tables, canvases, and other content!</span>
@@ -192,8 +192,8 @@
  			<span>Here's a whole message</span>
  		</div>
  		<br />
- 		<pre>&lt;div class="sign" autoscale scale="0.5" scaleContents&gt; :</pre>
- 		<div class="sign" autoscale scale="0.5" scaleContents>
+ 		<pre>&lt;div class="sign" scale="0.5" scaleContents&gt; :</pre>
+ 		<div class="sign" scale="0.5" scaleContents>
  			<h2>Resizing Text</h2>
  			<span>Here's a whole message</span>
  		</div>
@@ -205,26 +205,26 @@
 	<div id="orange">
 		This div contains an absolute div that contains the below text
 		<pre>
-&lt;span autoscale="orange" scale="0.5"&gt;
-&lt;span autoscale="orange" scale="0.5"&gt;
-&lt;span autoscale="orange" scale="0.5"&gt;
-&lt;span autoscale="orange" scale="0.25"&gt;
+&lt;span scale="0.5" scaleTo="orange"&gt;
+&lt;span scale="0.5" scaleTo="orange"&gt;
+&lt;span scale="0.5" scaleTo="orange"&gt;
+&lt;span scale="0.25" scaleTo="orange"&gt;
 		</pre>
 
 		<div id="absolute">
-	    <span autoscale="orange" scale="0.5">
+	    <span scale="0.5" scaleTo="orange">
 	    	Even though this text is
 	    </span>
 	    <br />
-	    <span autoscale="orange"  scale="0.5">
+	    <span scale="0.5" scaleTo="orange">
 	    	in an absolute positioned div,
 	    </span>
 	    <br />
-	    <span autoscale="orange" scale="0.5">
+	    <span scale="0.5" scaleTo="orange">
 	    	it's 50% of the orange div
 	    </span>
 	    <br />
-	    <span autoscale="orange" scale="0.25">
+	    <span scale="0.25" scaleTo="orange">
 	    	(And this is 25%)
 	    </span>
 	  </div>
