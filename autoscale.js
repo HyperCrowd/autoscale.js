@@ -1,3 +1,5 @@
+const regsiteredElements = {}
+
 const elements = {
 	fullText: [
 		'P',
@@ -111,27 +113,13 @@ function getTextWidth(element) {
 /**
  *
  */
-function setCssRoot(key, value) {
-	document.documentElement.style.setProperty('--' + key, value);
-}
-
-/**
- *
- */
-function getCssRoot(key) {
-  const rootStyles = getComputedStyle(document.documentElement)
-  return rootStyles.getPropertyValue('--' + key)
-}
-
-/**
- *
- */
 function scaleImage (element, scaleFactor) {
 	const ratio = 1
 	const width = element.width
 	const size = ratio * width * scaleFactor
 	element.width = size
 	element.style.width = ''
+	return size
 }
 
 /**
@@ -142,6 +130,7 @@ function scaleContainer (element, scaleFactor) {
 	const width = element.offsetWidth
 	const size = ratio * width * scaleFactor
 	element.style.width = size + 'px'
+	return size
 }
 
 /**
@@ -152,6 +141,7 @@ function scaleText (element, scaleFactor, textElement, referenceWidth) {
 	const width = parseFloat(window.getComputedStyle(element).fontSize)
 	const size = ratio * width * scaleFactor
 	textElement.style.fontSize = size + 'px'
+	return size
 }
 
 /**
@@ -163,6 +153,7 @@ function scaleFullWidthText (element, scaleFactor, textElement, referenceWidth) 
 	const size = ratio * width * scaleFactor
 	textElement.style.fontSize = size + 'px'
 	textElement.style.width = ((referenceWidth / element.offsetWidth) * element.offsetWidth) + 'px'
+	return size
 }
 
 /**
@@ -177,21 +168,28 @@ function scale (element, useReference = false, scaleFactorOverride = false) {
 		? document.getElementById(element.getAttribute('autoscale')) || element.parentNode
 		: useReference
 
-	const referenceWidth = referenceElement.offsetWidth
+	const referenceStyles = window.getComputedStyle(referenceElement);
+	const paddingLeft = parseFloat(referenceStyles.paddingLeft);
+	const paddingRight = parseFloat(referenceStyles.paddingRight);
+	const borderLeft = parseFloat(referenceStyles.borderLeft);
+	const borderRight = parseFloat(referenceStyles.borderRight);
+
+	const referenceWidth = referenceElement.offsetWidth - paddingLeft - paddingRight - borderLeft - borderRight
 
 	// Most HTML elements can be categorized as text, full text, image, or containers
 	// And each category has to address their own scaling rules
 
+	let result
+
 	if (elements.fullText.indexOf(element.tagName) > -1) {
 		// Full text scaling
-		console.log([element.textContent])
-		scaleFullWidthText(element, scaleFactor, element, referenceWidth)
+		result = scaleFullWidthText(element, scaleFactor, element, referenceWidth)
 	} else if (elements.text.indexOf(element.tagName) > -1) {
 		// Text scaling
-		scaleText(element, scaleFactor, element, referenceWidth)
+		result = scaleText(element, scaleFactor, element, referenceWidth)
 	} else if (elements.containers.indexOf(element.tagName) > -1) {
 		// Container scaling
-		scaleContainer(element, scaleFactor, element, referenceWidth)
+		result = scaleContainer(element, scaleFactor, element, referenceWidth)
 
 		const shouldScaleContents = useReference === false && element.getAttribute('scaleContents') === ''
 
@@ -201,7 +199,7 @@ function scale (element, useReference = false, scaleFactorOverride = false) {
 
 			if (children.length === 0) {
 				// No children exists, this is just a text leaf, so scale only the text
-				scaleFullWidthText(element, 1, element, element.offsetWidth)
+				result = scaleText(element, 1, element, element.offsetWidth)
 			} else {
 				// Scale the children
 				children.forEach(child => {
@@ -213,14 +211,26 @@ function scale (element, useReference = false, scaleFactorOverride = false) {
 		// Image scaling
 		if (element.complete) {
 			// The imageis loaded, just scale it
-			scaleImage(element, scaleFactor, element, referenceWidth)
+			result = scaleImage(element, scaleFactor, element, referenceWidth)
 		} else {
 			// The image hasn't been loaded it, scale it after the dimensions are known
 			element.addEventListener('load', () => {
-				scaleImage(element, scaleFactor, element, referenceWidth)
-			});				
+				result = scaleImage(element, scaleFactor, element, referenceWidth)
+			});
 		}
 	}
+}
+
+function register (element, width) {
+	if (regsiteredElements[element] === undefined) {
+		regsiteredElements[element] = {
+			lastWidth: width,
+			lastDepth: getDomDepth(element)
+		}
+	}
+}
+
+function resizeHandler (elements) {
 }
 
 /**

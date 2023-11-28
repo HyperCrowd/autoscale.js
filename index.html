@@ -37,6 +37,13 @@
 		background-color: lavender;
 	}
 
+	#olivedrab {
+		color: #fff;
+		margin-top: 2em;
+		width: 50%;
+		background-color: olivedrab;
+	}
+
 	#gray {
 		color: #000;
 		background-color: gray;
@@ -45,6 +52,22 @@
 	#absolute {
 		position: absolute;
 		border: 5px solid orange;
+	}
+
+	.sign {
+		width: 30%;
+		background-color: darkblue;
+		color: #fff;
+		text-align: center;
+		padding-left: 1em;
+		padding-right: 1em;
+		padding-top: 0.5em;
+		padding-bottom: 0.5em;
+	}
+
+	.sign h2 {
+		margin-top: 0;
+		margin-bottom: 0;
 	}
 
 	span, p {
@@ -160,6 +183,23 @@
 			</table>
 	  </div>
   </div>
+
+ 	<div id="olivedrab">
+ 		Here's autoscale accounting for padding for multiple text elements with class styling:
+ 		<pre>&lt;div&gt; :</pre>
+ 		<div class="sign">
+ 			<h2>Resizing Text</h2>
+ 			<span>Here's a whole message</span>
+ 		</div>
+ 		<br />
+ 		<pre>&lt;div class="sign" autoscale scale="0.5" scaleContents&gt; :</pre>
+ 		<div class="sign" autoscale scale="0.5" scaleContents>
+ 			<h2>Resizing Text</h2>
+ 			<span>Here's a whole message</span>
+ 		</div>
+
+ 	</div>
+
 
   <!-- Even text in absolute divs can be scaled to other references -->
 	<div id="orange">
